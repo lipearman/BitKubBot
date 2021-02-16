@@ -26,6 +26,8 @@ namespace BitKubBot.Services
         }
         public static async Task<Favorite[]> GetFavorite(string lineid)
         {
+            Favorite[] obj = null;
+
             var query = System.Net.WebUtility.UrlEncode("{\"lineid\":\"" + lineid + "\"}");
 
             var url = $"https://script.google.com/macros/s/AKfycbxe6QG2n8IRTWyv4nFMl3UMeUKp-6_i0wQlDbIVkN2xOC59f5jB-gYz1Q/exec?path=/favorite2&query={query}";
@@ -34,9 +36,19 @@ namespace BitKubBot.Services
 
             var jsdata = await HttpGet.GetStringAsync(url);
 
-            var obj = JsonConvert.DeserializeObject<MyFavorite>(jsdata);
+            try
+            {
+              var data = JsonConvert.DeserializeObject<MyFavorite>(jsdata);
 
-            return obj.items;
+                obj = data.items;
+            }
+            catch (Exception)
+            {
+
+                
+            }
+          
+            return obj;
         }
         public static async Task<string> GetFavoriteJSON(string lineid, string symbol)
         {
