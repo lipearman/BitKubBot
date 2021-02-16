@@ -161,10 +161,7 @@ else
             {
                 Context = await Liff.GetContext();
 
-                ohlc = await BitKubBot.Services.GoogleAPI.GetSymbol();
 
-                Favorites = await BitKubBot.Services.GoogleAPI.GetFavorite(Context.UserId);
-                Favorites = Favorites.OrderBy(x => x.symbol).ToArray();
             }
             //var idtoken = await Liff.GetDecodedIDToken();
             //TokenId = idtoken.Sub;
@@ -179,7 +176,13 @@ else
             //StateHasChanged();
 
 
+            ohlc = await BitKubBot.Services.GoogleAPI.GetSymbol();
 
+            Favorites = await BitKubBot.Services.GoogleAPI.GetFavorite(Context.UserId);
+            if (Favorites != null)
+            {
+                Favorites = Favorites.OrderBy(x => x.symbol).ToArray();
+            }
 
 
 
