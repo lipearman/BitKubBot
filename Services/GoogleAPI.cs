@@ -109,7 +109,7 @@ namespace BitKubBot.Services
             if (jsdata.IndexOf("\"" + symbol + "\"") == -1)
             {
 
-                var url = "https://script.google.com/macros/s/AKfycbxe6QG2n8IRTWyv4nFMl3UMeUKp-6_i0wQlDbIVkN2xOC59f5jB-gYz1Q/exec?path=/favorite&method=POST";
+                var url = "https://script.google.com/macros/s/AKfycbxe6QG2n8IRTWyv4nFMl3UMeUKp-6_i0wQlDbIVkN2xOC59f5jB-gYz1Q/exec?path=/favorite2&method=POST";
                 var postBody = new { lineid = lineid, symbol = symbol, active = 1, createdate = DateTime.Now };
 
                 var json = JsonConvert.SerializeObject(postBody);
