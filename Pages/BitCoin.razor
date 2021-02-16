@@ -19,6 +19,7 @@ else
         <MatTableHeader>
             <MatSortHeaderRow SortChanged="@SortData">
                 <MatSortHeader SortId="Symbol" Style="white-space: nowrap">Symbol</MatSortHeader>
+                <MatSortHeader SortId="Name" Style="white-space: nowrap">Name</MatSortHeader>
                 <MatSortHeader SortId="Close" Style="white-space: nowrap">Market</MatSortHeader>
                 <MatSortHeader SortId="Volume" Style="white-space: nowrap">Volume</MatSortHeader>
                 <MatSortHeader SortId="RSI_Signal" Style="white-space: nowrap">Momentum</MatSortHeader>
@@ -27,7 +28,7 @@ else
         </MatTableHeader>
         <MatTableRow>
             <td><MatButton OnClick="()=>OpenDialog(context)" Raised="true" Style="width:100px">@context.Symbol</MatButton></td>
-
+            <td style="white-space: nowrap">@context.Name</td>
             <td style="white-space: nowrap">@String.Format("{0:n2}", @context.Close)</td>
             <td style="white-space: nowrap">@String.Format("{0:n0}", @context.Volume)</td>
             <td style="white-space: nowrap">@context.RSI_Signal</td>
@@ -236,6 +237,17 @@ else
                     else
                     {
                         ohlc = ohlc.OrderBy(x => x.Symbol).ToArray();
+                    }
+                    break;
+                case "Name":
+                    //comparison = (s1, s2) => string.Compare(s1.Symbol, s2.Symbol, StringComparison.InvariantCultureIgnoreCase);
+                    if (sort.Direction == MatSortDirection.Desc)
+                    {
+                        ohlc = ohlc.OrderByDescending(x => x.Name).ToArray();
+                    }
+                    else
+                    {
+                        ohlc = ohlc.OrderBy(x => x.Name).ToArray();
                     }
                     break;
                 case "Close":
